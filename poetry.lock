@@ -1514,6 +1514,26 @@ Pillow = "*"
 streamlit = ">=0.63"
 
 [[package]]
+name = "streamlit-ext"
+version = "0.1.7"
+description = "Small handy widgets for streamlit, e.g. download button which won't cause rerun, set page width"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "streamlit-ext-0.1.7.tar.gz", hash = "sha256:9f0c59caa670ec6bd026449740f9b8d4b861677b00f0007e1da1d862199ee3b4"},
+    {file = "streamlit_ext-0.1.7-py3-none-any.whl", hash = "sha256:842b6e4d789cd714e1c54a7bdc524c058b545ef1b494cfb67bbddc4cf21b01ac"},
+]
+
+[package.dependencies]
+packaging = "*"
+streamlit = "*"
+
+[package.extras]
+dev = ["black (>=22.6.0)", "flake8 (>=4.0,<5.0)", "isort (>=5.10.1)", "mypy", "pandas-stubs (>=1.4.3)"]
+test = ["openpyxl", "pandas", "pytest (>=7.1)", "pytest-cov (>=3.0.0)"]
+
+[[package]]
 name = "sympy"
 version = "1.11.1"
 description = "Computer algebra system (CAS) in Python"
@@ -1840,4 +1860,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<3.9.7 || >3.9.7,<4.0"
-content-hash = "60f43cd17a66a59b1d1869f2ee237a3f18c12767ece247c1d082fbc0db71fed4"
+content-hash = "66b8f4b45144234b0059506c53c5830b191f463000005636d8e74accb177a546"
