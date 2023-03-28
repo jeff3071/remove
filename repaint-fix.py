@@ -72,7 +72,6 @@ if bg_image is not None:
         response_json = response.json()
         img_array = np.array(response_json['image']).astype(np.uint8)
 
-        # Image.fromarray(img_array).convert('RGB').show()
         st.image(Image.fromarray(img_array).convert('RGB'))
     if canvas_result.json_data is not None:
         objects = pd.json_normalize(canvas_result.json_data["objects"]) # need to convert obj to str because PyArrow
