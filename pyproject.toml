@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "streamlit-learning"
+version = "0.1.0"
+description = ""
+authors = ["Ethan Wu <304-ethwu0816004@users.noreply.git.cs.nctu.edu.tw>"]
+readme = "README.md"
+packages = [{include = "streamlit_learning"}]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.9.7 || >3.9.7,<4.0"
+streamlit = "^1.20.0"
+streamlit-drawable-canvas = "^0.9.2"
+torch = "^2.0.0"
+diffusers = "^0.14.0"
+accelerate = "^0.18.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
