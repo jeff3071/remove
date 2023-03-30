@@ -5,6 +5,8 @@ from streamlit_drawable_canvas import st_canvas
 import numpy as np
 import requests
 import io
+import os
+import time
 
 # Download the fixed image
 def convert_image(img: Image) -> bytes:
@@ -18,11 +20,14 @@ def repaint_image(image: Image, mask: Image) -> Image:
         'image': ("flower.png", convert_image(image), 'image/png'),
         'mask': ("flower_mask.png", convert_image(mask), 'image/png'),
     }
-
+    print('start')
+    start = time.time()
     response = requests.post(
-        "http://localhost:8000/uploadimage/",
+        f"{os.environ['LAMA_SERVER']}/uploadimage/",
         files=files,
     )
+    end = time.time()
+    print(f"{end - start} seconds")
 
     response_json = response.json()
     img_array = np.array(response_json['image']).astype(np.uint8)
@@ -51,7 +56,7 @@ if bg_image is not None:
     with toolbox_container:
         toolbox_col1, toolbox_col2, toolbox_col3 = st.columns(3)
         with toolbox_col2:
-            stroke_width = st.slider("Stroke width: ", 1, 100, 35)
+            stroke_width = st.slider("Stroke width: ", 1, 100, 100)
     
 
     resize_image = image_resize(image_upload, image.shape[0], image.shape[1])
@@ -74,13 +79,14 @@ if bg_image is not None:
         # )
     with col2:
         if canvas_result.image_data is not None and np.any(canvas_result.image_data):
-            st.image(resize_image)
+            # st.image(resize_image)
 
-            # mask = Image.fromarray(canvas_result.image_data.astype(np.uint8)*255)
+            mask = Image.fromarray(canvas_result.image_data.astype(np.uint8)*255)
 
-            # result_img = repaint_image(image_upload, mask)
+            result_img = repaint_image(resize_image, mask)
 
+            st.image(result_img)
             st.download_button(
-                "Download fixed image", convert_image(resize_image), "fixed.png", "image/png"
+                "Download fixed image", convert_image(result_img), "fixed.png", "image/png"
             )
-            # st.image(result_img)
+            
