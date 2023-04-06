@@ -72,13 +72,14 @@ if bg_image is not None:
             drawing_mode="freedraw",
             height = new_image_size.shape[0],
             width = new_image_size.shape[1],
-            key="canvas",
+            # key="canvas",
         )
-        # st.download_button(
-        #     "send image", convert_image(resize_image), "fixed.png", "image/png"
-        # )
+        
+        inpaint = st.button(
+            "inpaint",
+        )
     with col2:
-        if canvas_result.image_data is not None and np.any(canvas_result.image_data):
+        if canvas_result.image_data is not None and np.any(canvas_result.image_data) and inpaint:
             # st.image(resize_image)
 
             mask = Image.fromarray(canvas_result.image_data.astype(np.uint8)*255)
